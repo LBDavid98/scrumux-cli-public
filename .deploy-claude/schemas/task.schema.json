@@ -1,0 +1,477 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Task",
+  "description": "Atomic unit of work produced by the Planner from features/stories. Source file: governance/tasks.json ({\"entries\": [Task]}). Lifecycle constraint checked by self-check: at most `parallel` entries of the active sprint in_progress (D-0084) -- and never entries from two different ratified sprints at once. A task in no ratified sprint is still one at a time.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "acceptance_check",
+    "status",
+    "created_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^T-[0-9]{4}$"
+    },
+    "feature": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^F-[0-9]{4}$"
+    },
+    "story": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^S-[0-9]{4}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "A sentence naming the state that will be true when the work is done, not a noun phrase and not an id. Real examples: \"The close is not blocked by bytecode\" (T-0217); \"The graph does not crash on a repo it has never seen\" (T-0213); \"Rulings whose machinery was deleted are retired\" (D-0081). A title like \"fix session-check\" names a file and a verb, so a cold session cannot tell what was wrong or how anyone would know it stopped being wrong."
+    },
+    "description": {
+      "type": "string"
+    },
+    "acceptance_check": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stated before work starts. The task is done when this passes, not when the output looks done. It is command-verifiable: it names what must be observably true AND the suite that shows it. Real examples: \"graph gov build succeeds on a GOV_ROOT whose governance directory does not exist yet, and tests/graph-cli-tests.sh exits 0\" (T-0213); \"A tree containing __pycache__ or .pyc files closes session-check exit 0 when everything else traces to a worked task, an unauthorised source file still FAILs by name, and tests/session-check-tests.sh exits 0\" (T-0217). \"works\" and \"tests pass\" are not checks: neither names what would have to be false for it to fail."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "ready",
+        "in_progress",
+        "in_review",
+        "blocked",
+        "accepted",
+        "superseded"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "rank": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^D-[0-9]{4}$"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^I-[0-9]{4}$"
+      }
+    },
+    "issue": {
+      "type": "string",
+      "pattern": "^I-[0-9]{4}$",
+      "description": "The issue this task was promoted from (task new --issue, D-S041, SX-036). task accept TELLs it and session check WARNs while an accepted task's issue stays open; resolving the issue stays a person's act. Absent when the task was not created from an issue."
+    },
+    "log_entries": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^L-[0-9]{4}$"
+      }
+    },
+    "review": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^R-[0-9]{4}$"
+    },
+    "task_order": {
+      "type": "object",
+      "description": "Required before the task can enter a sprint (D-0005). The task's story field holds the one user story (required unless the sprint is hotfix).",
+      "required": [
+        "scope",
+        "out_of_scope",
+        "verification_command",
+        "context"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "light": {
+          "type": "boolean",
+          "description": "The light lane (D-0072 boundary 4, D-0073): an order minted from User's message in a standalone session rather than prepackaged by the app. Absent or false means the full lane. task-lint demotes its story and context-files FAILs to TELL when this is true; the acceptance-check and single-verification-command FAILs hold in BOTH lanes."
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What this task changes: the change, the site it lands at, and the evidence it rests on, so the implementer searches for none of the three. Real example: \"Add build and OS artefacts to session-check's scope exemption at :202, alongside governance/*, *.MD and .claude/*. Reproduced in canon acceptance run 4 - the close FAILed on agents/__pycache__/*.pyc\" (T-0217)."
+        },
+        "out_of_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Explicit do-NOT-touch list \u2014 the scope-creep brake. Each entry names the thing AND why it is out, so a later reader can tell a deliberate exclusion from an oversight. Real examples: \"Any other exemption. Only build and OS artefacts - a file an agent wrote is still a file an order must own\" (T-0217); \"I-0112's read-side self-heal on staleness - a NEW capability, frozen out; the issue stays documented\" (T-0213)."
+        },
+        "verification_command": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The command that proves the acceptance check passes. Exactly ONE runnable command, stating how to run it: \"sh tests/session-check-tests.sh\" (T-0217), not \"tests/session-check-tests.sh\" - 27 of 38 suites are mode 644 and exit 126 when invoked bare (D-0041). A composite command belongs in a script this points at."
+        },
+        "fails_when": {
+          "type": "string",
+          "description": "Optional (SX-003, D-S016): the broken state the verification command must catch -- what has to be true for the check to go red. Guidance and evidence only: task lint echoes it, task brief prints it, scrumux-app shows it at acceptance (and says when none was declared). Nothing refuses an order without it."
+        },
+        "context": {
+          "type": "object",
+          "description": "Full procedural context pack \u2014 assembled, not searched.",
+          "required": [
+            "files",
+            "refs",
+            "commands",
+            "interfaces",
+            "data_shapes"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "files": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "path",
+                  "why"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "why": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "What the implementer is meant to look FOR in that file, never what the file is. Real examples: \".claude/scripts/session-check | :202, the exemption case\"; \"agents/lib/governance_graph.py | the writer I-0111 traces to\"; \"tests/graph-cli-tests.sh | gains its own GOV_ROOT so it stops racing the live indexes\". A why that restates the filename tells the reader nothing they did not already have."
+                  },
+                  "expected_diff": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(D|I|C|S|F|E)-[0-9]{4}$"
+              },
+              "description": "Governance records that bear on the task."
+            },
+            "commands": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Ground-truth commands to run (tests, health checks)."
+            },
+            "interfaces": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "data_shapes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "expected_artifacts": {
+              "type": "array",
+              "description": "Paths this task will CREATE. Optional by necessity (I-0064): an order can name the files an implementer must read, but not files that do not exist yet. NOT in required \u2014 a sixth required key would invalidate every order already written.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "description": "The last task-verify run, written by the script and never by hand (T-0187). Overwritten on every run \u2014 the last receipt wins, because acceptance asks whether the CURRENT state is verified. Green = rc 0 AND checks_failed 0; scrumux task accept refuses anything else, and refuses a task with no receipt at all (D-0072 boundary 5).",
+      "required": [
+        "date",
+        "command",
+        "rc",
+        "checks_run",
+        "checks_failed"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "at_epoch": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "When the receipt was written, in epoch seconds. The close compares this against the mtime of every file the order covers, which is how verified-then-kept-typing is caught; date alone is a day and cannot resolve it. Optional: receipts written before this field existed cannot be judged for freshness, and the close says so rather than guessing."
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The task_order.verification_command as it was run. The close compares it against the order's command, which is how a verify run against something easier is caught."
+        },
+        "rc": {
+          "type": "integer",
+          "description": "Exit code of the verification command itself."
+        },
+        "checks_run": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "What ran: the order's own verification command, plus any registered repo-health checks executed alongside it. Always at least 1 on an honest verify \u2014 a receipt reporting 0 is a green that proved nothing, and the close fails it."
+        },
+        "checks_failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "file_hashes": {
+          "type": "object",
+          "description": "sha256 hex of every covered file (task_order.context.files[].path and expected_artifacts) that existed when this receipt was written, keyed by repo-relative path (SX-024). session check's 'receipt fresh' compares CONTENT with these: a differing hash, or a covered file present now and absent here, is a change. Absent on receipts written before the field; the close then falls back to comparing mtimes with at_epoch.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "acceptance": {
+      "type": "object",
+      "description": "User's final-authority ruling on this task (D-0076: acceptance targets the task, not a review record). Write-once while accepted is true; a rejection carries accepted:false and a reason, and the task returns to in_progress.",
+      "required": [
+        "accepted",
+        "by",
+        "date"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "accepted": {
+          "type": "boolean"
+        },
+        "by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "authority": {
+          "type": "string",
+          "pattern": "^(direct|app|app:[A-Za-z0-9._:-]+|standing:D-[0-9]{4})$",
+          "description": "How the act was authorised. direct = a person said so in this session; app = taken through scrumux-app, which is the authority (User's ruling, 2026-08-28), where no dispatch session is involved -- a sprint ratification is opened at repo level and belongs to no session, and naming one would invent it; app:<session> = the same, for an act that DOES belong to a dispatched session; standing:D-XXXX = a ratified delegation, and the D- ref must resolve."
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Required on a rejection \u2014 what has to change before it comes back. Name the defect and the bar: \"The receipt is green but its command is not the order's own command - re-verify against the order\" beats \"not done\", which names neither."
+        },
+        "reverified": {
+          "type": "boolean",
+          "description": "the acceptor re-ran the order verification_command at acceptance time rather than reading the receipt (I-0139). Absent on acceptances recorded before that was required."
+        },
+        "receipt": {
+          "type": "object",
+          "description": "The receipt this acceptance gated on, copied in and frozen (D-S018, SX-013). A later task verify never rewrites it; its runs go to post_acceptance_checks. Absent on acceptances recorded before the field, whose live `receipt` is then the frozen one.",
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "at_epoch": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "When the receipt was written, in epoch seconds. The close compares this against the mtime of every file the order covers, which is how verified-then-kept-typing is caught; date alone is a day and cannot resolve it. Optional: receipts written before this field existed cannot be judged for freshness, and the close says so rather than guessing."
+            },
+            "command": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The task_order.verification_command as it was run. The close compares it against the order's command, which is how a verify run against something easier is caught."
+            },
+            "rc": {
+              "type": "integer",
+              "description": "Exit code of the verification command itself."
+            },
+            "checks_run": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "What ran: the order's own verification command, plus any registered repo-health checks executed alongside it. Always at least 1 on an honest verify \u2014 a receipt reporting 0 is a green that proved nothing, and the close fails it."
+            },
+            "checks_failed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "file_hashes": {
+              "type": "object",
+              "description": "sha256 hex of every covered file (task_order.context.files[].path and expected_artifacts) that existed when this receipt was written, keyed by repo-relative path (SX-024). session check's 'receipt fresh' compares CONTENT with these: a differing hash, or a covered file present now and absent here, is a change. Absent on receipts written before the field; the close then falls back to comparing mtimes with at_epoch.",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "check_fingerprint": {
+          "type": "object",
+          "description": "A fingerprint of the check that was accepted (D-S045, SX-041): sha256 of each file or directory the verification command references that existed in the repo at acceptance (a script, a test path; a directory hashes its sorted regular files). scrumux-app compares it with the files now and shows 'the check itself changed since acceptance' beside post-acceptance runs. files may be empty (the command names no file); absent on acceptances recorded before the field, which reads as unknown.",
+          "required": [
+            "algo",
+            "files"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "algo": {
+              "type": "string",
+              "enum": [
+                "sha256"
+              ]
+            },
+            "files": {
+              "type": "object",
+              "description": "{repo-relative path: sha256 hex}",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "superseded": {
+      "type": "object",
+      "description": "Why this task was retired, and optionally the task that replaces it (T-0115/I-0059)."
+    },
+    "post_acceptance_checks": {
+      "type": "array",
+      "description": "task verify runs made AFTER acceptance (D-S018, SX-013), newest last, the last 10 kept. The acceptance receipt is not changed by them. A red newest entry is drift -- surfaced by session check (WARN) and scrumux-app -- not a broken task.",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "command",
+          "rc",
+          "checks_run",
+          "checks_failed"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "at_epoch": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "When the receipt was written, in epoch seconds. The close compares this against the mtime of every file the order covers, which is how verified-then-kept-typing is caught; date alone is a day and cannot resolve it. Optional: receipts written before this field existed cannot be judged for freshness, and the close says so rather than guessing."
+          },
+          "command": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The task_order.verification_command as it was run. The close compares it against the order's command, which is how a verify run against something easier is caught."
+          },
+          "rc": {
+            "type": "integer",
+            "description": "Exit code of the verification command itself."
+          },
+          "checks_run": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "What ran: the order's own verification command, plus any registered repo-health checks executed alongside it. Always at least 1 on an honest verify \u2014 a receipt reporting 0 is a green that proved nothing, and the close fails it."
+          },
+          "checks_failed": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "receipt_history": {
+      "type": "array",
+      "description": "task verify runs made BEFORE acceptance (SX-034), newest last, the last 10 kept; the newest is the run `receipt` records. A red run followed by a green one stays visible here, so review can see what the last receipt alone hides (a failed check that left side effects, then a green rerun). Never gates acceptance. Absent on tasks verified before the field: no history recorded.",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "command",
+          "rc",
+          "checks_run",
+          "checks_failed"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "at_epoch": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "When the receipt was written, in epoch seconds. The close compares this against the mtime of every file the order covers, which is how verified-then-kept-typing is caught; date alone is a day and cannot resolve it. Optional: receipts written before this field existed cannot be judged for freshness, and the close says so rather than guessing."
+          },
+          "command": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The task_order.verification_command as it was run. The close compares it against the order's command, which is how a verify run against something easier is caught."
+          },
+          "rc": {
+            "type": "integer",
+            "description": "Exit code of the verification command itself."
+          },
+          "checks_run": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "What ran: the order's own verification command, plus any registered repo-health checks executed alongside it. Always at least 1 on an honest verify \u2014 a receipt reporting 0 is a green that proved nothing, and the close fails it."
+          },
+          "checks_failed": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "blocked": {
+      "type": "object",
+      "required": [
+        "reason",
+        "date"
+      ],
+      "additionalProperties": false,
+      "description": "Why the task is blocked, from `task status T-XXXX blocked --reason TEXT` (SX-006): a step only the operator can take (a deploy), a permission a session cannot grant itself. Present only while status is blocked; any other status change removes it. scrumux-app shows it and offers the operator's way through.",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    }
+  }
+}

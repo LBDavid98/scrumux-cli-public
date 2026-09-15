@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Sprint",
+  "description": "A durable plan spanning sessions (D-0004). Epic-bounded, or a hotfix sprint promoted from a single issue. Not active until ratified by User. Source file: governance/sprints.json ({\"entries\": [Sprint]}).",
+  "type": "object",
+  "required": [
+    "id",
+    "status",
+    "tasks",
+    "created_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SP-[0-9]{4}$"
+    },
+    "epic": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^E-[0-9]{4}$",
+      "description": "Null only when hotfix is true."
+    },
+    "hotfix": {
+      "type": "boolean",
+      "description": "Hotfix lane: single-task sprint promoted from an issue, no epic process."
+    },
+    "source_issue": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^I-[0-9]{4}$",
+      "description": "Required when hotfix is true \u2014 the issue that was promoted."
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^T-[0-9]{4}$"
+      },
+      "description": "Every task added must carry a complete task_order (and a story, unless hotfix)."
+    },
+    "parallel": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1,
+      "description": "How many of this sprint's tasks may be in_progress at once (D-0084). Declared at planning because the sprint is the unit User ratifies, and changeable only while the sprint is `proposed` -- a change after ratification is a re-ratification. Absent means 1: every sprint written before D-0084 ran one task at a time, and a default is the honest reading of a field that did not exist. `--hotfix` is always 1."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "ratified",
+        "complete",
+        "abandoned"
+      ]
+    },
+    "ratified": {
+      "type": "object",
+      "required": [
+        "by",
+        "date"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "authority": {
+          "type": "string",
+          "pattern": "^(direct|app|app:[A-Za-z0-9._:-]+|standing:D-[0-9]{4})$",
+          "description": "How the act was authorised. direct = a person said so in this session; app = taken through scrumux-app, which is the authority (User's ruling, 2026-08-28), where no dispatch session is involved -- a sprint ratification is opened at repo level and belongs to no session, and naming one would invent it; app:<session> = the same, for an act that DOES belong to a dispatched session; standing:D-XXXX = a ratified delegation, and the D- ref must resolve."
+        }
+      },
+      "description": "Present iff status has reached ratified. Names WHO ratified and on what authority. `by` used to default to a literal name in the CLI, which wrote it onto acts User did not take; it is now required. `authority` is required by the CLI for every NEW ratification but NOT by this schema: 27 ratifications here predate the field, and a schema that demanded it would force either a red repo for ever or a backfilled attestation nobody can stand behind. `records check` warns on the gap instead (2026-08-28)."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "descoped": {
+      "type": "array",
+      "description": "Tasks removed from this sprint after ratification, each with the reason and date (T-0067). Removing UNWORKED work from a plan is a ruling; a task with log entries is refused, since removing it would rewrite the record. The reason names what changed and where the work went: \"I-0112's read-side self-heal is a NEW capability and the freeze holds; the issue stays documented\" rather than \"out of scope\", which only restates the act the plan already framed.",
+      "items": {
+        "type": "object",
+        "required": [
+          "task",
+          "reason",
+          "date"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "task": {
+            "type": "string",
+            "pattern": "^T-[0-9]{4}$"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "date": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "additions": {
+      "type": "array",
+      "description": "Tasks added AFTER the sprint was ratified (D-S017). The addition is allowed and waits for its own ratification: `task brief` fails its sprint gate for the added task until `sprint ratify` ratifies the addition, and the tasks ratified with the sprint are unaffected. The sprint's own `ratified` block is never rewritten by an addition's ratification. Absent on every sprint written before the field, which therefore has no pending additions.",
+      "items": {
+        "type": "object",
+        "required": [
+          "task",
+          "date",
+          "ratified"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "task": {
+            "type": "string",
+            "pattern": "^T-[0-9]{4}$"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "ratified": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Null while the addition awaits ratification; then who ratified it, when, and on what authority (same vocabulary as the sprint's `ratified.authority`)."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "scrumux.deployable-artifact.manifest/1",
+  "title": "Deployable artifact manifest",
+  "description": "The manifest at the root of one versioned cut under deployable-artifacts/. Minimal on purpose: this is a scaffold for a packaging step that does not exist yet (port Phase 6), and a schema that guesses at fields nobody writes is a schema that gets ignored on first contact.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "source_commit", "created", "files"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "The cut's version. Also the name of the folder holding it, so a manifest and its directory cannot disagree.",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.-]+)?$"
+    },
+    "source_commit": {
+      "type": "string",
+      "description": "The full 40-character git SHA the cut was made from. Full, not abbreviated: an abbreviation is a prefix that stops being unique as the repo grows.",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "created": {
+      "type": "string",
+      "description": "When the cut was made, RFC 3339 with an offset.",
+      "format": "date-time"
+    },
+    "files": {
+      "type": "array",
+      "description": "Every file in the cut, each with its hash. The list is the cut: a file present on disk but absent here is not part of it.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path relative to the cut's own folder. Never absolute, never escaping the folder with '..'.",
+            "pattern": "^(?!/)(?!.*(^|/)\\.\\.(/|$)).+$"
+          },
+          "sha256": {
+            "type": "string",
+            "description": "SHA-256 of the file's bytes, lowercase hex.",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "mode": {
+            "type": "string",
+            "description": "Optional POSIX mode, octal. Present only where it matters — a hook or script written 0644 fails with exit 126 wherever it is registered (I-0060).",
+            "pattern": "^0[0-7]{3}$"
+          }
+        }
+      }
+    },
+    "note": {
+      "type": "string",
+      "description": "Optional one-line reason this cut exists. Not a changelog."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "version": "0.0.0-example",
+  "source_commit": "0000000000000000000000000000000000000000",
+  "created": "2026-09-01T00:00:00-04:00",
+  "note": "Not a real cut. The shape a manifest takes, for reading; no packaging step exists yet.",
+  "files": [
+    {
+      "path": ".claude/scripts/scrumux",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "mode": "0755"
+    },
+    {
+      "path": ".claude/rules/enforcement-posture.md",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ]
+}

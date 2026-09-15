@@ -1,0 +1,30 @@
+# LF IN THE INDEX AND LF IN THE WORKING TREE, ON EVERY PLATFORM.
+#
+# Git for Windows installs with core.autocrlf=true. Without this file, a
+# Windows clone of this repo gets CRLF in every .sh, .json, .mjs and .ts on
+# disk, and then:
+#
+#   - `harness verify` hashes .claude/dist/*.mjs and BUILD.json and reports
+#     drift on files nobody touched;
+#   - `npm run diff` compares post-state as TEXT and every case reds;
+#   - `records check` recomputes seals over journal bytes that now differ;
+#   - the four wall bundles are shipped as .mjs and are hashed the same way.
+#
+# None of that is a port defect and all of it presents as one, which makes it
+# the most expensive class of bug this repo can have. `eol=lf` is stronger
+# than `text=auto` alone: it pins the WORKING TREE, not only the index, so the
+# bytes a Windows box reads are the bytes the seal was computed over.
+#
+# Verified at the commit that added this: zero tracked files carry a CR byte,
+# so this normalises nothing and changes no hash today. It exists to keep that
+# true.
+* text=auto eol=lf
+
+# The tree-sitter grammars behind `graph code build`. Git's binary heuristic
+# would almost certainly classify these correctly on its own; "almost
+# certainly" is not the standard for thirteen blobs whose ABI has to match a
+# pinned parser exactly.
+*.wasm binary
+
+# Generated lockfile: LF like everything else, but never diffed by a human.
+package-lock.json -diff linguist-generated

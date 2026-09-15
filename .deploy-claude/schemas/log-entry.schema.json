@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LogEntry",
+  "description": "What happened — append-only journal entry. Source file: governance/log.json ({\"entries\": [LogEntry]}). AI_LOG.MD is the generated view. No silent finishes: a task cannot reach accepted without a log entry referencing it.",
+  "type": "object",
+  "required": ["id", "date", "actor", "title", "what_was_done"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^L-[0-9]{4}$" },
+    "date": { "type": "string", "format": "date" },
+    "task": {
+      "type": ["string", "null"],
+      "pattern": "^T-[0-9]{4}$",
+      "description": "Null only for bootstrap/pre-task-system work."
+    },
+    "actor": { "type": "string", "minLength": 1 },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One sentence in the past tense naming what changed and the record ids it settles. Real example: \"The prune stopped eating the two files deploy promises never to overwrite (I-0152, I-0153)\" (L-0285). \"fixed hook\" is eight words of jargon that name neither the hook nor what stopped being wrong."
+    },
+    "what_was_done": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The EVIDENCE, not a story: the verify command and its rc, the diffstat, and every refusal hit and what was done about it. Real example: \"harness deploy's seeding lane creates project-standards.md and project-walls.conf create-if-absent; the I-0143 prune then removed any path the previous manifest names that payload.list lacks. Fixed by writing each seeded path into seeded.list and skipping it in the prune. sh tests/harness-tests.sh rc=0; 3 files changed, 61 insertions\" (L-0285). \"created X, verified Y\" carries nothing a reader who was not present can check."
+    },
+    "verification": {
+      "type": "string",
+      "description": "Evidence the acceptance check passed — command output, file, screenshot ref; the EVIDENCE block verbatim. Real example: \"Planted first: 11 new assertions in tests/harness-tests.sh shown FAILING against 444dfd1 in a detached worktree, including 'deploy DESTROYED .claude/rules/project-standards.md because a previous manifest claimed it'. After the fix: harness-tests exits 0\" (L-0285). A check planted before it passed is worth more than one that was green from the start."
+    },
+    "pending": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "What is knowingly not done, and why it is safe to leave. Real example: \"seals.json is a record records-check reads and is correctly left out, so the first views render on a never-sealed target still leaves that one file untracked\"."
+    }
+  }
+}

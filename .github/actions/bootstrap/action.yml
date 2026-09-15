@@ -1,0 +1,70 @@
+name: bootstrap
+description: >
+  Node at the requested version with a warm npm cache, dependencies
+  installed, and jq (the one non-node prerequisite this harness still has).
+  Factored out because every job needs the identical steps and a copy of a
+  shell conditional in four places is four chances to fix three of them.
+
+  WHAT USED TO BE HERE. Before bash and its python code-graph builder were
+  retired (2026-09-03), this action also built a `.venv` with the
+  tree-sitter grammar packages and installed bubblewrap as readonly-sh's
+  Linux sandbox backend. Neither is a dependency of anything CI runs now:
+  `graph code build` loads the grammars as committed `.wasm` blobs through
+  `web-tree-sitter` (an npm dependency, not a pip one), and readonly-sh does
+  not ship — the five read-only agent definitions name their TOOL SCOPE
+  (frontmatter, not an OS sandbox) as the boundary instead.
+
+inputs:
+  node-version:
+    description: The Node major to install. 22 is the engines floor.
+    required: false
+    default: '22'
+  jq:
+    description: >
+      Whether this job needs jq. Two vitest files (jqformat.test.ts,
+      jqformat-parser.test.ts) compare this repo's formatter against the
+      real binary, and the shell parity suites (tests/*.sh) use it to build
+      and read their own JSON fixtures. `tools/ci/posix-partition.mjs`
+      already excludes every jq-dependent test from the Windows partition,
+      so set false there.
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: npm
+
+    - name: npm ci
+      shell: bash
+      run: npm ci
+
+    # ASSERTED, NOT ASSUMED. Both hosted Linux and macOS images ship jq
+    # today. "Ships it today" is not a contract, and the failure mode of a
+    # missing jq is not a clean error -- test/unit/jqformat-parser.test.ts
+    # treats a jq that will not run as a jq that rejects everything, which
+    # reddens the rows that expect acceptance and silently passes the rows
+    # that expect rejection. So: find it or install it, and print the version
+    # either way so the log says which one answered.
+    - name: ensure jq
+      if: inputs.jq == 'true'
+      shell: bash
+      run: |
+        set -e
+        if command -v jq >/dev/null 2>&1; then
+          echo "jq already present"
+        elif [ "$RUNNER_OS" = "Linux" ]; then
+          echo "jq absent — installing via apt"
+          sudo apt-get update -qq
+          sudo apt-get install -y jq
+        elif [ "$RUNNER_OS" = "macOS" ]; then
+          echo "jq absent — installing via brew"
+          brew install jq
+        else
+          echo "jq absent and this runner ($RUNNER_OS) has no package manager this action knows" >&2
+          exit 1
+        fi
+        jq --version

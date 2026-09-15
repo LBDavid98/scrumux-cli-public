@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DecisionEntry",
+  "description": "Ratified choice \u2014 the precedent record. Source file: governance/decisions.json ({\"entries\": [DecisionEntry]}), append-only; changed precedent uses supersedes, never edits. DECISIONS.MD is the generated view.",
+  "type": "object",
+  "required": [
+    "id",
+    "date",
+    "title",
+    "decision",
+    "rationale"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^D-[0-9]{4}$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The ruling itself in one line, so a reader who greps the journal gets the answer without opening the entry. Real examples: \"Parallel dispatch admission: a per-sprint cap declared at planning\" (D-0084); \"Four gates became advice, and the rulings still say fail\" (D-0082). \"sprint changes\" names the area and withholds the ruling, which is the whole content."
+    },
+    "decision": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The rule as it will be applied - the shape, the defaults, and what each surface does about it - written so an implementer can act without a follow-up question. Real example: \"A sprint carries parallel (integer >= 1, default 1) ... The cap may be changed only while the sprint is proposed; changing it after ratification is a re-ratification, not an edit. --hotfix implies parallel 1\" (D-0084). \"we will allow parallel work\" is a direction, not a rule: every surface would invent its own version of it."
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What was weighed, INCLUDING the options that were rejected and what was wrong with each - that is the part a later session needs when it is tempted to undo this. Real example: \"Three shapes were put to User. A: a per-sprint cap declared at planning. B: per-worktree admission. C: the app is the gate. User ruled A ... B ties a governance rule to a git detail no journal models; C would leave a hand-driven session ungated entirely\" (D-0084). \"it is better this way\" gives the next reader nothing to weigh against."
+    },
+    "ratified_by": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Who ratified it: User directly, or the delegation they granted (name it). Written by `decide new` only when --authority resolved, and by `decide ratify`. ABSENT on a proposed or rejected decision (D-S039) -- nobody ratified it. A record with no `status` predates D-S039 and always carries it."
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "repo",
+        "cross-repo"
+      ]
+    },
+    "refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "task": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^T-[0-9]{4}$"
+        },
+        "issue": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^I-[0-9]{4}$"
+        },
+        "push_hold": {
+          "type": "string",
+          "description": "HEAD sha this decision holds the push at, so decisions-pending stops counting it and the hold expires when new work lands (T-0120/I-0065)."
+        }
+      }
+    },
+    "supersedes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^D-[0-9]{4}$"
+    },
+    "superseded_by": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(D-[0-9]{4})?$",
+      "description": "The decision that replaced this one, stamped onto it when that decision is written. R-U10 requires provenance to distinguish live law from dead: `supersedes` points forward and a reader who lands on the OLD decision sees nothing at all, so a dead ruling read on its own is indistinguishable from current law. Six decisions were in that state when this field was added."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "ratified",
+        "rejected"
+      ],
+      "description": "The decision's standing (D-S039, SX-020). `decide new` writes ratified when --authority resolved, proposed otherwise; `decide ratify` / `decide reject` move it. ABSENT on a record written before D-S039, which every reader takes as ratified with authority unknown -- never as bad. A proposed decision binds nothing: it does not retire what it supersedes and cannot be cited as a standing delegation."
+    },
+    "authority": {
+      "type": "string",
+      "minLength": 1,
+      "description": "On what basis it binds: direct | app:<session> | standing:D-XXXX, or none for a proposed decision. Absent on a legacy record (read as unknown)."
+    },
+    "authority_claimed": {
+      "type": "string",
+      "description": "An --authority `decide new` was given that did not resolve, kept for the person who reviews the proposed decision."
+    },
+    "recorded_by": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Who ran `decide new` -- the recorder, which is not a ratification."
+    },
+    "ratified_at": {
+      "type": "string",
+      "format": "date",
+      "description": "When `decide ratify` ratified it."
+    },
+    "prior_ratified_by": {
+      "type": "string",
+      "description": "The free-text ratified_by a legacy record carried before a person ratified it with an authority; kept so the original claim survives."
+    },
+    "rejected_by": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The person who rejected it (`decide reject`)."
+    },
+    "rejected_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "rejection_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "acknowledged_by": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The person who saw an authority-less or proposed record and kept it as it is (`decide acknowledge`); its standing is unchanged."
+    },
+    "acknowledged_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "acknowledgement_note": {
+      "type": "string"
+    }
+  }
+}

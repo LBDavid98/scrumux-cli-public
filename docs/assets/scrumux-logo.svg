@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="520" height="120" role="img" aria-label="scrumux — a governance harness for AI coding agents">
+  <title>scrumux</title>
+  <style>
+    .ink   { fill: #14181f; }
+    .muted { fill: #5b6673; }
+    .seal  { stroke: #14181f; }
+    .wall  { fill: #d1462f; }
+    @media (prefers-color-scheme: dark) {
+      .ink   { fill: #e8ecf1; }
+      .muted { fill: #94a3b3; }
+      .seal  { stroke: #e8ecf1; }
+      .wall  { fill: #ff6b4f; }
+    }
+  </style>
+
+  <!-- The seal: a record whose bytes are hashed. The four bars on its
+       perimeter are the four walls, the only things that stop a tool call. -->
+  <g transform="translate(16,16)">
+    <rect x="6" y="6" width="76" height="76" rx="16" fill="none" class="seal" stroke-width="5"/>
+
+    <!-- four walls, one per edge -->
+    <rect class="wall" x="36" y="0"  width="16" height="7" rx="3.5"/>
+    <rect class="wall" x="36" y="81" width="16" height="7" rx="3.5"/>
+    <rect class="wall" x="0"  y="36" width="7"  height="16" rx="3.5"/>
+    <rect class="wall" x="81" y="36" width="7"  height="16" rx="3.5"/>
+
+    <!-- the ledger inside: entries, append-only -->
+    <rect class="ink" x="24" y="30" width="40" height="6" rx="3"/>
+    <rect class="ink" x="24" y="42" width="40" height="6" rx="3"/>
+    <rect class="ink" x="24" y="54" width="24" height="6" rx="3"/>
+  </g>
+
+  <text x="118" y="62"
+        font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace"
+        font-size="46" font-weight="700" letter-spacing="-1.5" class="ink">scrumux</text>
+
+  <text x="120" y="88"
+        font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace"
+        font-size="13.5" letter-spacing="0.5" class="muted">the record is the source of truth</text>
+</svg>

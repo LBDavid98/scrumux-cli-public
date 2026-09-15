@@ -1,0 +1,232 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Issue",
+  "description": "Captured out-of-scope finding or drift. Source file: governance/issues.json ({\"entries\": [Issue]}). resolution_pointer is mandatory: issues point the agent to how to resolve without scope creep.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "source",
+    "summary",
+    "resolution_pointer",
+    "status",
+    "created_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^I-[0-9]{4}$"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "drift",
+        "defect",
+        "idea",
+        "governance",
+        "harness"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "User",
+        "human",
+        "claude",
+        "monitor",
+        "implement-sop",
+        "session-check",
+        "session-review",
+        "planning-session",
+        "issue-validator",
+        "simplicity-engineer",
+        "panel-review",
+        "debugger",
+        "governance-validate",
+        "decisions-pending",
+        "arbiter-review",
+        "audit-agent"
+      ],
+      "description": "Who raised it \u2014 a closed vocabulary, not prose (T-0130). It was an unconstrained string and drifted into sentences like 'issue-validator sweep 2026-08-20, found while disproving I-0071', which made it useless as the 'who raises what' dimension the gate telemetry needs. 'human' absorbs the old 'user'; 'simplicity-engineer' absorbs the old 'simplicity-audit'."
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What was SEEN, at which site, and the command or observation that shows it - a summary a validator cannot reproduce from is not a report. Real examples: \"harness deploy seeds no .gitignore lines for the views scrumux writes, so running a report dirties a deployed repo's tree. Repro: deploy into a git repo, commit, run scrumux views render, git status shows four untracked generated files\" (I-0153); \"Three walls emit wall: project-walls.conf while the four named walls emit their own names; a reader grouping by wall cannot tell which project wall fired\" (I-0151). \"deploy is broken\" is not one: no site, no repro, nothing to confirm or refute."
+    },
+    "resolution_pointer": {
+      "type": "string",
+      "minLength": 1,
+      "description": "How to resolve \u2014 the rule, skill, script, or step that fixes it, so the agent needn't improvise. It BOUNDS the work; it is not the work. Real examples: \"deploy appends the ignore lines for exactly what views render writes into the target's .gitignore, once: append-only and append-if-absent, so a second deploy adds nothing\" (I-0153); \"The prune must never remove a path the seeding lane owns, and the exclusion must come from that lane rather than a second literal\" (I-0152). \"fix it\" and \"investigate\" bound nothing, so the next session picks its own scope."
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "accepted",
+        "resolved",
+        "rejected"
+      ]
+    },
+    "refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "task": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^T-[0-9]{4}$"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "waives": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^T-[0-9]{4}$"
+      },
+      "description": "Explicit sprint-discipline waiver list (T-0033/I-0012): only open|accepted governance issues waive, and only the tasks named here or in refs.task \u2014 never by summary prose."
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "verdict",
+        "evidence",
+        "by",
+        "date"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "verdict": {
+          "type": "string",
+          "enum": [
+            "reproduced",
+            "evidenced",
+            "invalidated",
+            "duplicate"
+          ]
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1,
+          "description": "How it was reproduced, what the run printed, and the line the mechanism sits on. Real example: \"cmd-session.sh:146 tests for a .git DIRECTORY; inside a worktree .git is a file, so the stray scan is silently skipped\". A disproof is written the same way and is a deliverable, not a failure (D-0011). \"confirmed\" is the reporter's claim restated under a second name."
+        },
+        "repro_cmd": {
+          "type": "string",
+          "minLength": 1
+        },
+        "duplicate_of": {
+          "type": "string",
+          "pattern": "^[IT]-[0-9]{4}$"
+        },
+        "by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "description": "Validate-before-fix verdict (T-0034). Absent = unvalidated; hotfix promotion refuses. invalidated = close as rejected, the disproof is D-0011 data. duplicate = attach to duplicate_of and close."
+    },
+    "validation_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "verdict",
+          "evidence",
+          "by",
+          "date"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "reproduced",
+              "evidenced",
+              "invalidated",
+              "duplicate"
+            ]
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "repro_cmd": {
+            "type": "string",
+            "minLength": 1
+          },
+          "duplicate_of": {
+            "type": "string",
+            "pattern": "^[IT]-[0-9]{4}$"
+          },
+          "by": {
+            "type": "string",
+            "minLength": 1
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "description": "Superseded verdicts, oldest first, written only by issue validate --revalidate. A verdict is what both promotion gates read, so it is never replaced silently: superseding one keeps it here rather than erasing the evidence a disjoint validator recorded (F7)."
+    },
+    "authorization": {
+      "type": "object",
+      "required": [
+        "by",
+        "date"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "description": "Fix authorization on the final authority's word (I-0010). A separate fact from validation \u2014 authorized is not validated. Passes the hotfix gate on its own."
+    },
+    "prior_resolution_pointers": {
+      "type": "array",
+      "description": "Resolution pointers this issue previously carried, kept when --fix replaces one so a correction is visible where the wrong text used to be (T-0114/I-0057)."
+    }
+  }
+}

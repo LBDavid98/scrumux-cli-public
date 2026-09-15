@@ -1,0 +1,96 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.claude/scripts/scrumux*)",
+      "Bash(git *)",
+      "Bash(sh tests/*)",
+      "Bash(bash tests/*)",
+      "Bash(sh scripts/*)",
+      "Bash(bash scripts/*)",
+      "Bash(pytest*)",
+      "Bash(python3 *)",
+      "Bash(python *)",
+      "Bash(.venv/bin/*)",
+      "Bash(ruff *)",
+      "Bash(mypy *)",
+      "Bash(pnpm *)",
+      "Bash(node *)",
+      "Bash(which *)",
+      "Bash(grep *)",
+      "Bash(find *)",
+      "Edit",
+      "Write",
+      "Bash(mkdir *)",
+      "Bash(rm *)"
+    ]
+  },
+  "env": {
+    "GATEWAY_USER_ID": "harness"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/dist/block-direct-llm.mjs"]
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/dist/block-secret-reads.mjs"]
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/dist/block-destructive.mjs"]
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/dist/block-upstream-edit.mjs"]
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/dist/block-secret-reads.mjs"]
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/dist/block-upstream-edit.mjs"]
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/dist/session-guard.mjs"]
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/dist/scrumux.mjs", "status", "session"]
+          }
+        ]
+      }
+    ]
+  }
+}

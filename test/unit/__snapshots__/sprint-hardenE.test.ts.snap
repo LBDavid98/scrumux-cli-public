@@ -1,0 +1,3804 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: a plain order with no story 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint add: error: one user story per task: T-0002 has no story — set it via scrumux task order T-0002 --story S-XXXX ... (hotfix sprints and light orders are the storyless lanes; mint a light one with scrumux task order T-0002 --light ...)
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: a sprint that does not exist 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint add: error: sprint add: SP-9999 not found in sprints.json — create it first: scrumux sprint new --epic E-XXXX
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: a sprint with no tasks key at all 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "tasks": [
+        "T-0001"
+      ],
+      "updated_at": "<DATE>"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "T-0001 added to SP-0004
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: a task that does not exist 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint add: error: task T-9999 not found in governance/tasks.json — create it first: scrumux task new --title ... --check ...
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: a task whose order is an explicit null 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint add: error: task order first: T-0005 has no task_order — complete it before it can enter a sprint (D-0005): scrumux task order T-0005 --scope ... --verify ... --file "path | why"
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: a task with no order (D-0005) 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint add: error: task order first: T-0003 has no task_order — complete it before it can enter a sprint (D-0005): scrumux task order T-0003 --scope ... --verify ... --file "path | why"
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: a third positional is silently ignored 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0001",
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "T-0001 added to SP-0001
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: no positionals 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint add: error: usage: scrumux sprint add SP-0001 T-0001
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: one positional 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint add: error: usage: scrumux sprint add SP-0001 T-0001
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: the hotfix storyless lane 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [
+        "T-0002"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "T-0002 added to SP-0003
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: the light storyless lane (D-0073) 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0004",
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "T-0004 added to SP-0001
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: unique DEDUPES -- T-0009 is already carried 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "T-0009 added to SP-0001
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > add: unique SORTS -- T-0001 lands ahead of T-0009 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0001",
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "T-0001 added to SP-0001
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > an unknown verb 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint nope: error: unknown verb 'nope' for noun sprint — verbs: new, add, update, descope, ratify, status. See: scrumux help sprint
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > descope: --reason is required 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint descope: error: sprint descope: --reason is required — a descope with no recorded reason is indistinguishable from a task that vanished. Name what changed and where the work went. GOOD "I-0112 read-side self-heal on staleness is a NEW capability and the freeze holds; the issue stays documented and nothing here depends on it landing this sprint". GOOD "Superseded by T-0217, which covers the same session-check exemption and adds the negative case; this one would land the weaker half of it". BAD "out of scope" — the plan already said what was in scope, so that only restates the act.
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > descope: ONE positional reaches the flag loop (the shift quirk) 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint descope: error: sprint descope: unknown flag SP-0001 — usage: scrumux sprint descope SP-0001 T-0001 --reason TEXT
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > descope: T-0144 TELLS and descopes anyway 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "descoped": [
+        {
+          "task": "T-0009",
+          "reason": "superseded by T-0217",
+          "date": "<DATE>"
+        }
+      ],
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "TELL: T-0009 has 2 log entry/entries — it was worked, and descoping does not erase them. Descoping anyway; retire it instead with scrumux task status T-0009 superseded --reason ... if that is what you meant.
+T-0009 descoped from SP-0001
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > descope: a sprint that does not exist 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint descope: error: sprint descope: SP-9999 not found in sprints.json
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > descope: a sprint with no tasks key carries nothing 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint descope: error: sprint descope: T-0009 is not carried by SP-0004 — see the plan: .claude/scripts/scrumux status --sprint
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > descope: a task that does not exist 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint descope: error: task T-9999 not found in governance/tasks.json — create it first: scrumux task new --title ... --check ...
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > descope: a task the sprint does not carry 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint descope: error: sprint descope: T-0001 is not carried by SP-0001 — see the plan: .claude/scripts/scrumux status --sprint
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > descope: an unknown flag 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint descope: error: sprint descope: unknown flag --nope — usage: scrumux sprint descope SP-0001 T-0001 --reason TEXT
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > descope: no positionals 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint descope: error: usage: scrumux sprint descope SP-0001 T-0001 --reason TEXT
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: --hotfix accepts the cap it CAN honour 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0005",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "<DATE>"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0005
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: --hotfix and --epic are mutually exclusive 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint new: error: sprint new: --hotfix and --epic are mutually exclusive
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: --hotfix on an issue that does not exist 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint new: error: sprint new: issue I-9999 not found in issues.json
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: --hotfix opens on User's authorization alone (I-0010) 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0005",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0002",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "<DATE>"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0005
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: --hotfix opens on a reproduced verdict 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0005",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "<DATE>"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0005
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: --hotfix refuses a cap it cannot honour 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint new: error: sprint new: a hotfix sprint runs one task — it is one issue promoted to one task, so there is no second slot to declare (D-0084). Drop --parallel, or open an epic-lane sprint.
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: --hotfix with no --issue 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint new: error: sprint new: hotfix sprints need --issue I-0001 (the issue being promoted, per D-0004) — scrumux sprint new --hotfix --issue I-XXXX
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: --parallel 007 is canonicalised by jq's own parse 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0005",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 7,
+      "created_at": "<DATE>"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0005
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: an E- id whose .kind is not epic 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint new: error: sprint new: epic E-0002 not found — add it first: scrumux epic new --name ... --desc ...
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: an epic that does not exist 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint new: error: sprint new: epic E-9999 not found — add it first: scrumux epic new --name ... --desc ...
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: an unknown flag 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint new: error: sprint new: unknown flag --nope — see: scrumux help sprint
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: neither --epic nor --hotfix 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint new: error: sprint new: --epic E-0001 is required (sprints are epic-bounded, D-0004) — or use --hotfix --issue I-0001 for the fast lane
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: parallel_guard on a non-numeric cap 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint new: error: sprint new: --parallel must be a whole number 1 or more, got 'lots' — it is how many tasks of this sprint may be in_progress at once (D-0084)
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: parallel_guard on zero 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint new: error: sprint new: --parallel must be a whole number 1 or more, got '0' — a sprint that admits nothing is an abandoned sprint (scrumux sprint status <id> abandoned)
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > new: the epic lane, default parallel 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0005",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "<DATE>"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0005
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: --by is required (it used to default to User) 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint ratify: error: sprint ratify: --by is required — name who is ratifying. It used to default to 'User', which wrote his name onto acts he did not take. Use --by User when he ratifies, or the agent's own id when it does.
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: a sprint that does not exist 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint ratify: error: sprint ratify: SP-9999 not found — see BACKLOG.MD Sprints section or create: scrumux sprint new
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: a standing delegation that DOES resolve 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "ratified": {
+        "by": "User",
+        "date": "<DATE>",
+        "authority": "standing:D-0001"
+      },
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0001 ratified
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: a standing delegation that does not resolve 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint ratify: error: sprint ratify: --authority standing:D-9999 does not resolve in governance/decisions.json — a standing delegation must be a ratified decision; record it first (scrumux decide new ...) or use --authority direct
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: an ABSENT task list is not a plan either 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint ratify: error: sprint ratify: SP-0004 has no tasks — a sprint plan is a collection of 1 or more tasks; add them first (scrumux sprint add SP-0004 T-XXXX)
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: an empty task list is not a plan 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint ratify: error: sprint ratify: SP-0003 has no tasks — a sprint plan is a collection of 1 or more tasks; add them first (scrumux sprint add SP-0003 T-XXXX)
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: an unknown flag 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint ratify: error: sprint ratify: unknown flag --nope — see: scrumux help sprint
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: app:<session> 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "ratified": {
+        "by": "agent",
+        "date": "<DATE>",
+        "authority": "app:sess-1"
+      },
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0001 ratified
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: authority_guard, empty 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint ratify: error: sprint ratify: --authority is required — direct (a person said so in this session), app:<session> (taken through scrumux-app), or standing:D-XXXX (a ratified delegation). An act with no recorded authority is indistinguishable from an agent acting on its own say-so.
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: authority_guard, outside the vocabulary 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint ratify: error: sprint ratify: --authority must be direct, app:<session>, or standing:D-XXXX, got 'because'
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: bare app is the control-plane act 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "ratified": {
+        "by": "scrumux-app",
+        "date": "<DATE>",
+        "authority": "app"
+      },
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0001 ratified
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: direct 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "ratified": {
+        "by": "User",
+        "date": "<DATE>",
+        "authority": "direct"
+      },
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0001 ratified
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > ratify: no id 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint ratify: error: usage: scrumux sprint ratify SP-0001 --by WHO --authority direct|app:<session>|standing:D-0001
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > status: a sprint that does not exist 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint status: error: sprint status: SP-9999 not found
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > status: a state this verb does not own 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint status: error: sprint status: only complete|abandoned here (ratification has its own command: scrumux sprint ratify)
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > status: abandoned 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "abandoned",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0001 -> abandoned
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > status: complete 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "complete",
+      "parallel": 1,
+      "created_at": "2026-08-01",
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0001 -> complete
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > status: no positionals 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint status: error: usage: scrumux sprint status SP-0001 complete|abandoned
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > status: no state 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint status: error: usage: scrumux sprint status SP-0001 complete|abandoned
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > update: THE RE-RATIFICATION GUARD (D-0084) 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint update: error: sprint update: SP-0002 is ratified — changing how many tasks a RATIFIED plan runs at once is a re-ratification, not an edit (D-0084). Open a new sprint for the extra work, or have User ratify the changed plan again.
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > update: a hotfix sprint has no second slot 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint update: error: sprint update: SP-0003 is a hotfix sprint — one issue, one task, one slot; there is nothing to widen (D-0084)
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > update: a proposed sprint IS widened 1`] = `
+{
+  "rc": 0,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 3,
+      "created_at": "2026-08-01",
+      "updated_at": "<DATE>"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "",
+  "stdout": "SP-0001 updated — up to 3 task(s) in flight once it is ratified
+",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > update: a sprint that does not exist 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint update: error: sprint update: SP-9999 not found in sprints.json — see BACKLOG.MD Sprints section, or open it first: scrumux sprint new --epic E-XXXX --parallel N
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > update: an unknown flag 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint update: error: sprint update: unknown flag --nope — the only field this verb changes is --parallel N; tasks, status and ratification have their own verbs (scrumux help sprint)
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > update: no id 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint update: error: usage: scrumux sprint update SP-0001 --parallel N
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > update: nothing to update 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint update: error: sprint update: nothing to update — the only field this verb changes is --parallel N (D-0084)
+",
+  "stdout": "",
+}
+`;
+
+exports[`sprint: every arm, pinned as a golden rather than remembered > update: parallel_guard 1`] = `
+{
+  "rc": 2,
+  "sprints": "{
+  "entries": [
+    {
+      "id": "SP-0001",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0002",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "tasks": [
+        "T-0009"
+      ],
+      "status": "ratified",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0003",
+      "epic": null,
+      "hotfix": true,
+      "source_issue": "I-0001",
+      "tasks": [],
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    },
+    {
+      "id": "SP-0004",
+      "epic": "E-0001",
+      "hotfix": false,
+      "source_issue": null,
+      "status": "proposed",
+      "parallel": 1,
+      "created_at": "2026-08-01"
+    }
+  ]
+}
+",
+  "stderr": "scrumux sprint update: error: sprint update: --parallel must be a whole number 1 or more, got 'lots' — it is how many tasks of this sprint may be in_progress at once (D-0084)
+",
+  "stdout": "",
+}
+`;

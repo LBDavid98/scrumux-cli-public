@@ -1,0 +1,268 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DesignArtifacts",
+  "description": "The design-gate artifacts, tiered per the lifecycle: minimum = features + stories; preferred adds surfaces + controls; ideal adds wireframe/Claude design (external ref). Source file: governance/design.json — a uniform {entries:[{kind,...}]} journal since T-0082; consumers project per-kind via `designView`/`loadDesign` in src/nouns/status.ts and src/nouns/records.ts. Statement ids (B-) are stable and testable.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "entries"
+  ],
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/definitions/epic"
+          },
+          {
+            "$ref": "#/definitions/feature"
+          },
+          {
+            "$ref": "#/definitions/story"
+          },
+          {
+            "$ref": "#/definitions/surface"
+          },
+          {
+            "$ref": "#/definitions/control"
+          },
+          {
+            "$ref": "#/definitions/wireframe_ref"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "epic": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "name",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "epic"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^E-[0-9]{4}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The state of the world the epic reaches, said as a claim rather than a heading: \"Self-knowledge: the harness sees its own code and its own governance\" (E-0005). \"Improvements\" names no destination, so nothing can be said to be inside or outside it."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What changes when the epic lands, and where the scope came from. Real example: \"The harness stands alone: it installs into any repo, proves it is live there, refuses only what is dangerous ... Everything in this epic comes from the deep-dive review of 2026-08-20 and D-0058..D-0061\" (E-0006)."
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^F-[0-9]{4}$"
+          }
+        }
+      }
+    },
+    "feature": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "name",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "feature"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^F-[0-9]{4}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The capability, in two or three words: \"Gate integrity\" (F-0009), \"Deployability\" (F-0013). \"Phase 2 improvements\" is a schedule, not a capability."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What the capability makes possible and how you can tell. Real example: \"No gate reports a pass it did not earn. The four cross-script dependencies fail closed instead of open; the destructive-command attestation leaves a record; the issue source field is a constrained enum so drift data has a reliable who-raised-this dimension\" (F-0009)."
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^F-[0-9]{4}$"
+          }
+        },
+        "stories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^S-[0-9]{4}$"
+          }
+        },
+        "rank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Deliberate priority among features (T-0093). Same address space and semantics as a task's rank: absent means never prioritised, and absence must never render as a priority. NOT required."
+        }
+      }
+    },
+    "story": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "feature",
+        "narrative",
+        "acceptance_criteria"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "story"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^S-[0-9]{4}$"
+        },
+        "feature": {
+          "type": "string",
+          "pattern": "^F-[0-9]{4}$"
+        },
+        "narrative": {
+          "type": "string",
+          "minLength": 1,
+          "description": "\"As the <specific who>, I <do what> so that <outcome>\" - the who is a named person or system, never \"a user\". Real example: \"As User, I accept a task directly - my documented approval is the review - and acceptance refuses any task whose verify receipt is red, so a false close cannot recur\" (S-0069)."
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "Each one an observable check a person could confirm or deny by looking at the running thing or its record, one behaviour per criterion. Real examples: \"scrumux accept T-XXXX --authority refuses a red or missing receipt and is write-once\" (S-0069); \"harness verify executes every registered surface\" (S-0070). A criterion with \"and\" in it is usually two, and \"acceptance is reliable\" is an adjective rather than a check."
+        }
+      }
+    },
+    "surface": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "name",
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "surface"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^SF-[0-9]{4}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "cli",
+            "tui",
+            "web",
+            "api",
+            "file",
+            "other"
+          ]
+        }
+      }
+    },
+    "control": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "surface",
+        "statements"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "control"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^C-[0-9]{4}$"
+        },
+        "surface": {
+          "type": "string",
+          "pattern": "^SF-[0-9]{4}$"
+        },
+        "name": {
+          "type": "string"
+        },
+        "statements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "mode",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^B-[0-9]{4}$"
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "MUST",
+                  "MUST_NOT"
+                ]
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "wireframe_ref": {
+      "type": "object",
+      "required": [
+        "kind",
+        "ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "wireframe_ref"
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "URL or path to a wireframe / Claude design artifact (ideal tier)."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RepoHealthCheck",
+  "description": "One declared health command. Source file: governance/repo-health.json ({\"entries\": [RepoHealthCheck]}). T-0157/I-0035: this schema used to describe the CONTAINER while every other schema describes one record, which is why the journal could not be listed in schema-check's PAIRS and the contract was read by nothing. The shared runner (`run_health_checks` in `src/nouns/health.ts`, called from `task verify`) executes these under their declared timeout_seconds.",
+  "type": "object",
+  "required": [
+    "name",
+    "command"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "command": {
+      "type": "string",
+      "minLength": 1,
+      "description": "POSIX shell command; exit 0 = healthy."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "build",
+        "test",
+        "run",
+        "lint",
+        "other"
+      ]
+    },
+    "timeout_seconds": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

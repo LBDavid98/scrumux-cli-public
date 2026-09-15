@@ -1,0 +1,69 @@
+{
+  "name": "scrumux",
+  "//name": "TODO(publish): registry availability is User's call at publish time (Phase 6). The bin name is `scrumux` regardless.",
+  "version": "0.0.0",
+  "description": "A governance harness for AI coding agents: it installs into a code repository and makes the record \u2014 not the chat log, not the agent's recollection \u2014 the thing the next session works from.",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "bin": {
+    "scrumux": "./.deploy-claude/dist/scrumux.mjs"
+  },
+  "engines": {
+    "node": ">=22.11"
+  },
+  "files": [
+    ".deploy-claude/",
+    "tools/grammars/",
+    "README.MD"
+  ],
+  "//files": "Allowlist, not a denylist: governance journals, tests and logs can never ship by accident. DERIVED, NOT GUESSED \u2014 every entry is a path the CLI reads from its own CODE ROOT: `.deploy-claude/` is the payload (bin points into its dist/, which is what makes codeRoot resolve to the package root) and `tools/grammars/` is the thirteen wasm blobs `graph code build` parses with. It carried five `agents/lib/*.py` and `tools/wall-shim.sh.in` until the bash retirement took both. Anything a published install is missing from this list is not a soft failure \u2014 a deploy from it lands a target that verify then calls broken.",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest",
+    "//test": "--coverage is not optional: the thresholds in vitest.config.ts are declared CI-FATAL, and a gate that only runs when someone remembers the flag is not a gate. It ran without it until Phase 1d.",
+    "test:ts-only": "node tools/ci/posix-partition.mjs --run",
+    "//test:ts-only": "The Windows lane. The file list is DERIVED from the tree by tools/ci/posix-partition.mjs, never hand-written, so a new test file is classified the moment it lands rather than the next time somebody remembers an exclude list. No --coverage on purpose: the thresholds in vitest.config.ts are measured against the WHOLE suite, so a subset graded against them fails for arithmetic rather than for coverage.",
+    "ci:partition": "node tools/ci/posix-partition.mjs",
+    "smoke": "node tools/ci/smoke.mjs",
+    "//smoke": "The end-to-end claim, driven as a process against a real git repo: the built CLI, a deploy, an envelope, a journal write re-read for CR bytes, and two wall bundles fed a hook payload. Needs `npm run build` first. It is the only proof that survives having no shell at all.",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "parity:suites": "sh tools/parity-suites.sh",
+    "oracle:corpus": "node test/oracle/build-corpus.mjs"
+  },
+  "//dependencies": "web-tree-sitter is pinned EXACT, not caret-ranged, and it is the only entry that is: it is the parse engine behind `graph code build`, its ABI has to match the thirteen grammar .wasm blobs committed under tools/grammars/ (twelve languages plus the tsx dialect) (see the README there), and a silent minor bump is exactly the grammar-version skew a parity migration exists to prevent. IT IS A RUNTIME DEPENDENCY, moved out of devDependencies on User's ruling (2026-09-03): the reader/builder split is about the TARGET, which answers every graph query from the on-disk index with no parser at all \u2014 it was never about the INSTALL, and `harness deploy` builds that index from the harness it runs out of. As a devDependency, an `npm i -g` install had no runtime at all: deploy reported code-graph-built=false and every `graph code` query in the target answered 'no index'. The bundle still loads it by COMPUTED path (src/nouns/graph/code-build.ts) so esbuild cannot inline the parser into the payload that ships into governed repos.",
+  "dependencies": {
+    "web-tree-sitter": "0.27.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@vitest/coverage-v8": "^2.1.9",
+    "esbuild": "^0.24.2",
+    "eslint": "^9.17.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.19.0",
+    "vitest": "^2.1.8"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "claude",
+    "claude-code",
+    "governance",
+    "harness",
+    "code-review",
+    "workflow",
+    "cli",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LBDavid98/scrumux-cli-public.git"
+  },
+  "homepage": "https://github.com/LBDavid98/scrumux-cli-public#readme",
+  "bugs": {
+    "url": "https://github.com/LBDavid98/scrumux-cli-public/issues"
+  }
+}

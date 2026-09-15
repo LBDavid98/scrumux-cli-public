@@ -1,0 +1,56 @@
+# payload-exclude.list — what lives under a PAYLOAD_DIR and must NEVER ship.
+#
+# `harness deploy` installs everything the walk finds under .claude/scripts,
+# schemas, rules, hooks, skills and agents. This file is the one way to say
+# "not that one". Read `payload_excluded` in .claude/scripts/lib/cmd-harness.sh
+# for the mechanism and the reason it had to exist.
+#
+# Format:
+#   one repo-relative path per line   .claude/rules/example.md
+#   a trailing / excludes a directory .claude/skills/example/
+#   # anywhere a line starts         a comment
+#   text after a space on a path      a trailing comment, ignored
+#
+# An excluded path is absent from the deploy roster, from what `harness
+# verify` demands of a target, and from the manifest — one walk feeds all
+# three.
+#
+# STOP SHIPPING IS NOT THE SAME ACT AS TAKING IT BACK, and listing a path
+# here decides only the first. What the prune does to the copies already
+# installed depends on WHAT KIND OF FILE IT IS:
+#
+#   MACHINERY (scripts, hooks, schemas, and the rules and skills the
+#   harness authors) — RECLAIM IT. A stale script left in a target still
+#   RUNS: an agent can invoke a command one version out of date and write
+#   records with it, which is worse than its absence. The target never
+#   authored it, so there is nothing there to lose. This is the prune's
+#   default, and it needs no declaration.
+#
+#   TARGET-EDITABLE DOCUMENTS — WALK AWAY FROM IT. A file the harness
+#   shipped and then invited the target to edit is that repo's own record
+#   by the time it is retired, and deleting it destroys something this
+#   repo never wrote and cannot reconstruct. Declare it to `seeded()` in
+#   the deploy lane; the prune leaves it and the new manifest stops
+#   claiming it. governance/enforcement-posture.md is the worked example
+#   — see "RETIRED, NOT RECLAIMED" in cmd-harness.sh.
+#
+# The three paths listed below are the first kind by intent — they are
+# source-only guidance that never should have reached a target, so reclaim
+# is correct for them and they are deliberately NOT prune-exempt.
+#
+# THE BAR FOR ADDING A LINE: the file is guidance about BUILDING the harness,
+# and it would be false or harmful in a repo the harness governs. Machinery
+# ships. Prose that contradicts the deployed constitution does not.
+#
+# NOTHING under .claude/scripts, .claude/hooks or .claude/schemas may be
+# listed here, and tests/payload-exclude-tests.sh refuses it. Those three are
+# the machinery, and verify's surface-coverage check is derived from the same
+# roster this file filters — so excluding a script would drop it from the
+# probe table with nothing left to notice, which is I-0104 by a new route.
+
+# The source-session support. Each of these describes a session in THIS repo,
+# where root RULINGS.md is the only governance document and the whole scrumux
+# loop is refused — the exact opposite of what a governed repo is told.
+.claude/rules/source-session.md
+.claude/agents/finding-validator.md
+.claude/skills/source-implement/   # a skill is a DIRECTORY, so the whole prefix goes

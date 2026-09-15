@@ -1,0 +1,179 @@
+name: CI
+
+# THE MATRIX IS THE PROOF THE MIGRATION WAS FOR.
+#
+# This repo ported a bash harness to TypeScript for exactly one reason: bash
+# is not a thing a Windows operator has. Everything else the port bought --
+# types, a test suite, a bundle -- is a consequence. Bash itself was retired
+# on 2026-09-01 once every noun answered natively, so the matrix is no
+# longer proving a port against a bash counterpart; it is proving the one
+# remaining implementation on the three platforms an operator actually runs
+# it on:
+#
+#   ubuntu    the pure-TypeScript suite, coverage gate and the shell parity
+#             suites (tests/*.sh — real integration cases against a real
+#             deploy, unaffected by which language answers them). Also where
+#             the GNU/BSD tool divergences the code already anticipates
+#             (grep dialects, [[:space:]] under a non-C locale) either hold
+#             or do not.
+#   macos     the same gates on the platform the port was certified on, so a
+#             green ubuntu with a red macos is legible as a Linux finding
+#             rather than a mystery.
+#   windows   the ONLY claim that matters for the mandate: the bundles build,
+#             the pure-TypeScript suite passes, and a person with no shell can
+#             drive the built CLI against a real repo and get an answer.
+#
+# WHY TWO JOBS AND NOT ONE PER OS. `npm test` and the shell parity suites are
+# independent enough (one drives vitest in-process, the other spawns the
+# built CLI dozens of times) that a red parity suite should not hide a green
+# vitest run or vice versa.
+#
+# fail-fast is OFF everywhere on purpose. A matrix that cancels its siblings
+# on the first red surrenders exactly the information the run exists to
+# collect.
+#
+# NOTHING HERE IS CACHED EXCEPT node_modules. The bundles under
+# .deploy-claude/dist/ are gitignored, so every lane that needs them builds
+# them -- which also means every lane is proving the build, not a stale
+# artifact somebody uploaded.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # `harness verify` hashes the payload against `.claude/DEPLOYED` and the
+  # shell parity suites diff journal bytes against fixed expectations. Git
+  # for Windows installs with core.autocrlf=true, which would rewrite every
+  # committed .sh, .json and .mjs on checkout and turn those comparisons red
+  # for a reason that has nothing to do with the port. .gitattributes pins
+  # this in the repo; these are the belt to its braces, because a runner
+  # image can carry a global config that predates the file and
+  # GIT_CONFIG_* wins over both.
+  GIT_CONFIG_COUNT: '2'
+  GIT_CONFIG_KEY_0: core.autocrlf
+  GIT_CONFIG_VALUE_0: 'false'
+  GIT_CONFIG_KEY_1: core.eol
+  GIT_CONFIG_VALUE_1: lf
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # The TypeScript side. Runs on all three, and Windows is the point of it.
+  # ---------------------------------------------------------------------------
+  ts:
+    name: ts (${{ matrix.os }}, node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    # Several vitest files and `npm run smoke` each deploy a skeleton, and
+    # `harness deploy`'s code-graph-built check builds the index from the
+    # committed .wasm grammars on every one of them.
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # 22 is the engines floor (package.json `>=22.11`) and the version
+          # src/util/node-version.ts refuses below, so it is the one that has
+          # to be green. 24 rides along on ubuntu because it is what the port
+          # was developed and certified on, and a floor-only matrix would
+          # never notice a newer-runtime break.
+          - os: ubuntu-latest
+            node: '22'
+            jq: 'true'
+          - os: ubuntu-latest
+            node: '24'
+            jq: 'true'
+          - os: macos-latest
+            node: '22'
+            jq: 'true'
+          # `tools/ci/posix-partition.mjs` already excludes every jq-dependent
+          # test from what Windows runs, so it needs none installed.
+          - os: windows-latest
+            node: '22'
+            jq: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/bootstrap
+        with:
+          node-version: ${{ matrix.node }}
+          jq: ${{ matrix.jq }}
+
+      - name: typecheck
+        run: npm run typecheck
+
+      # Not free on Windows: tsconfig sets forceConsistentCasingInFileNames,
+      # and eslint's globbing is where a case-insensitive filesystem tells on
+      # itself.
+      - name: lint
+        run: npm run lint
+
+      - name: build the CLI and the four wall bundles
+        run: npm run build
+
+      # The partition is printed on EVERY platform, not only the one that acts
+      # on it. A reviewer who only ever reads the ubuntu log has no other way
+      # to learn what Windows is not running, and a skip nobody can see is a
+      # skip that becomes permanent.
+      - name: show the POSIX/Windows test partition
+        run: npm run ci:partition
+
+      - name: vitest with the coverage gates
+        if: runner.os != 'Windows'
+        run: npm test
+
+      # Windows runs the mechanically-derived subset that needs no POSIX
+      # shell, no jq and no mode bits. NO --coverage: the thresholds in
+      # vitest.config.ts are measured against the WHOLE suite, and a subset
+      # graded against them would fail for arithmetic rather than for
+      # coverage. The runner prints what ran and what did not, before and
+      # after the vitest output.
+      - name: vitest, POSIX-free partition
+        if: runner.os == 'Windows'
+        run: npm run test:ts-only
+
+      # The end-to-end claim, and the only step that drives the built CLI as a
+      # process against a real git repo: version, help, a refusal's exit code,
+      # `harness deploy`, `status session --json`, a journal write re-read for
+      # CR bytes, and two wall bundles fed a hook payload on stdin. It runs on
+      # all three so a Windows difference reads as a difference and not as an
+      # unknown.
+      - name: smoke the built CLI, the walls and the journal bytes
+        run: npm run smoke
+
+  # ---------------------------------------------------------------------------
+  # The shell parity suites (tests/*.sh) — the integration tier. Each drives
+  # the built CLI as a real process against a real deploy; POSIX only, since
+  # the suites themselves are shell.
+  #
+  # WHAT USED TO BE HERE. Before bash was retired (2026-09-03) this repo had
+  # two implementations to compare — a `differential` job running both as
+  # subprocesses over generated cases, an `impl` matrix running these same
+  # suites against bash/TypeScript/every-verb-routed-to-TypeScript, and a
+  # `walls` job comparing the bash hooks against the .mjs bundles case by
+  # case. All of that machinery (tools/differential/**,
+  # tools/parity-suites.sh's --impl flag, npm's diff/walls scripts) went with
+  # bash itself. One implementation means one lane.
+  # ---------------------------------------------------------------------------
+  parity:
+    name: parity (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    # The grammars are committed .wasm blobs now (no python venv to build),
+    # so a deploy costs about the same across these suites as it does in the
+    # ts job above; raised from a bash-era floor to give the dozens of
+    # deploys each suite runs headroom on a slower runner.
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/bootstrap
+      - run: npm run build
+      - name: parity suites
+        run: sh tools/parity-suites.sh

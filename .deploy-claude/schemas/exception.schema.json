@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Exception",
+  "description": "A governance or PROCESS finding about a session: whether the work followed the rules. Source file: governance/exceptions.json ({\"entries\": [Exception]}). DELIBERATELY NOT AN ISSUE. An issue is a code-level discovery -- the schema is wrong, the gateway needs a parameter, I am blocked by Y -- and R-U59 governs those. This is the other kind: did the agent use the skills, did the scripts run, were exceptions raised, did it act on them, did the actions translate to resolution. The foundation already defined the word: 'Exception: a hook or review finding on a session, filed as a process defect against the harness.' Every finding carries a disposition, because a reviewer is never a blocker -- it annotates and proposes, and a person decides.",
+  "type": "object",
+  "required": [
+    "id",
+    "lens",
+    "severity",
+    "ref",
+    "finding",
+    "disposition",
+    "status",
+    "source",
+    "created_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^X-[0-9]{4}$"
+    },
+    "lens": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Which reviewer raised it. Free text, because the roster is the control plane's and this journal must not have to be migrated when a lens is added. Name the QUESTION the reviewer was asking, so the list groups usefully: \"Scope against the order\", \"Repo standards\" (X-0001), \"scripts_run\" (X-0002). \"review\" separates nothing -- every finding comes from one."
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["red", "yellow"],
+      "description": "Two levels only, matching ReviewSessionException. There is no green: a finding nobody needs to see is not filed."
+    },
+    "ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What it is about, in the reader's terms -- a task id, a file, a rule, a sprint. With a line number where there is one: \"harness .claude/scripts/lib/cmd-records.sh:264\" (X-0001), \"T-0217\", \"issue-validation.md\". \"the CLI\" is not a ref -- nobody can open it."
+    },
+    "finding": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What happened, what is believed to explain it, and what remains unproven -- the person who decides was not in the session. Real example: \"Running records check through the control plane appended 'printf: write error: Broken pipe' to the output the app displayed. The cause is believed to be grep -q closing the pipe under printf, which only reports when the parent has SIGPIPE ignored -- as Node does. Eleven call sites were hardened and 497 harness tests stay green, but the symptom was NOT reproduced in eight attempts, so the fix is not confirmed to address it\" (X-0001). \"the session did not follow the rules\" names no act and no rule, so nothing can be settled."
+    },
+    "disposition": {
+      "type": "string",
+      "enum": [
+        "accept_and_track",
+        "requires_ratification",
+        "correct_the_record",
+        "reject_the_task"
+      ],
+      "description": "The reviewer's RECOMMENDATION, in escalating order, defaulting to accept_and_track. correct_the_record means a bounded mechanical repair that must not require an LLM call. reject_the_task is the last resort. None of them is self-executing: a person decides."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["open", "tracked", "ratified", "corrected", "rejected", "withdrawn"],
+      "description": "Where the finding got to. Set to open on filing; only a person moves it, because a reviewer is never a blocker and is never an authority either."
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Who raised it. An agent names itself; a person names themselves."
+    },
+    "session": {
+      "type": ["string", "null"],
+      "description": "The session whose work this is about, when one is known."
+    },
+    "task": {
+      "type": ["string", "null"],
+      "pattern": "^(T-[0-9]{4})?$",
+      "description": "The task under review, when the finding is about one."
+    },
+    "sprint": {
+      "type": ["string", "null"],
+      "pattern": "^(SP-[0-9]{4})?$"
+    },
+    "rule": {
+      "type": ["string", "null"],
+      "description": "The rule, decision or skill the finding is measured against, when there is one. A finding that cites nothing is still legitimate -- not every process failure has a written rule -- so this is optional rather than required."
+    },
+    "created_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "resolution": {
+      "type": ["string", "null"],
+      "description": "What a person did about it, recorded when the status moves off open."
+    },
+    "resolved_by": {
+      "type": ["string", "null"]
+    },
+    "resolution_status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "ratified",
+        "rejected"
+      ],
+      "description": "The standing of the RESOLUTION (D-S039) -- `status` is the finding's own lifecycle and is not overloaded. `exception resolve` writes ratified when --authority resolved, proposed otherwise; `exception ratify` / `exception reject` move it (reject also reopens the finding). ABSENT on a resolution written before D-S039: read as ratified with authority unknown."
+    },
+    "authority": {
+      "type": "string",
+      "minLength": 1,
+      "description": "direct | app:<session> | standing:D-XXXX, or none for a proposed resolution."
+    },
+    "authority_claimed": {
+      "type": "string",
+      "description": "An --authority given to `exception resolve` that did not resolve."
+    },
+    "recorded_by": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Who ran `exception resolve`."
+    },
+    "ratified_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ratified_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "prior_ratified_by": {
+      "type": "string"
+    },
+    "rejected_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rejected_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "rejection_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "acknowledged_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "acknowledged_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "acknowledgement_note": {
+      "type": "string"
+    }
+  }
+}

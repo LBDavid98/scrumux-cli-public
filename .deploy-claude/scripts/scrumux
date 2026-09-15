@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+"use strict";
+// scrumux — THE command surface of the harness, and nothing but a doorway.
+//
+// The CLI itself is the bundle beside this file at ../dist/scrumux.mjs. This
+// entry point exists because the PATH is contract: every deployed
+// settings.json, every permission rule, every task_order's --verify line, the
+// surface probes in `harness verify`, the tests/*.sh corpus and scrumux-app's
+// canon check (packages/server/src/dispatch/canon.ts) all name
+// `.claude/scripts/scrumux`. Renaming the command to save a doorway would
+// break all of that.
+//
+// It replaced 8,792 lines of POSIX shell — a dispatcher, lib.sh, lib/cli.sh,
+// lib/journal.sh, the flip shim and 21 noun modules — retired on 2026-09-03
+// once the TypeScript side answered every verb. `git show bash-cli-final:` has
+// the whole of it.
+//
+// WRITTEN TO RUN AS EITHER MODULE KIND, and that is not fussiness. This file
+// has no extension, so Node decides ESM-or-CJS from the nearest package.json —
+// which belongs to the TARGET repo and may say anything or not exist. So:
+// no `require`, no `import` statement, no `import.meta`, no top-level await.
+// Dynamic `import()` is the one form legal in both, and it is all this uses.
+//
+// IN-PROCESS, NOT A SECOND NODE. The bundle derives where the harness lives
+// from `process.argv[1]`, exactly as the shell prologue derived it from `$0`,
+// so importing it here leaves that answer pointing at this directory —
+// `.claude/scripts` in a deployment, `.deploy-claude/scripts` in the source
+// repo. Spawning a child would cost a second ~25ms startup and would have to
+// forward argv, stdio and the exit code by hand.
+var self = process.argv[1] || "";
+var cut = Math.max(self.lastIndexOf("/"), self.lastIndexOf("\\"));
+var sep = cut < 0 ? "/" : self.charAt(cut);
+var dir = cut < 0 ? "." : self.slice(0, cut);
+var bundle = dir + sep + ".." + sep + "dist" + sep + "scrumux.mjs";
+
+import("node:url").then(function (url) {
+  return import(url.pathToFileURL(bundle).href);
+}).catch(function (e) {
+  // FAIL LOUDLY AND NAME THE FILE. A CLI that cannot find its own bundle is
+  // a broken install, not a failed assertion, so this is exit 2 — "the
+  // command could not run" — and never 0 or 1.
+  process.stderr.write(
+    "scrumux: error: cannot load the CLI bundle at " + bundle + " — "
+    + ((e && e.message) || e) + "\n"
+    + "  The bundle ships with the harness. Restore it with: scrumux harness deploy <this repo>\n"
+    + "  from a harness checkout, or reinstall the package.\n",
+  );
+  process.exit(2);
+});

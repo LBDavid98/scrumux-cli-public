@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RuleFrontmatter",
+  "description": "Validated header for .claude/rules/*.md so the self-check can verify the CLAUDE.MD -> rules -> skills -> scripts chain mechanically. Every skill and script a rule points to must exist (dangling pointers are drift findings).",
+  "type": "object",
+  "required": ["name", "paths"],
+  "additionalProperties": false,
+  "properties": {
+    "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "paths": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Glob patterns this rule loads for. Use [\"**\"] for always-load rules."
+    },
+    "skills": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Skill names this rule points to."
+    },
+    "scripts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Repo-relative paths to deterministic scripts this rule relies on."
+    },
+    "hooks": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Repo-relative paths to hooks that enforce this rule."
+    }
+  }
+}

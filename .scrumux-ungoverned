@@ -1,0 +1,1 @@
+This repo builds scrumux and must exist outside the harness; governing it with its own tool bakes transient, often flawed policy into the record. Rulings live in RULINGS.md.
